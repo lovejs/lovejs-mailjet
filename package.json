@@ -1,13 +1,19 @@
 {
     "name": "@lovejs/mailjet",
+    "author": "Vincent <vincent@fullstack.pro>",
     "version": "0.0.1",
-    "description": "",
+    "description": "Lovejs mailjet",
     "main": "src/index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+    "keywords": ["lovejs", "mailjet", "lovejs plugin"],
+    "license": "MIT",
+    "homepage": "http://lovejs.io/",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lovejs/lovejs-mailjet.git"
     },
-    "author": "",
-    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/lovejs/lovejs-mailjet/issues"
+    },
     "dependencies": {
         "node-mailjet": "^3.2.1"
     },
