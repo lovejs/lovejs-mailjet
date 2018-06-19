@@ -13,8 +13,14 @@ class Mailer {
     getSender() {
         if (!this.sender) {
             const mailjet = require("node-mailjet");
-            this.mailjet = mailjet.connect(this.key, this.secret);
-            this.sender = this.mailjet.post("send", { version: "v3.1" });
+            this.mailjet = mailjet.connect(
+                this.key,
+                this.secret,
+                {
+                    version: "v3.1"
+                }
+            );
+            this.sender = this.mailjet.post("send");
         }
 
         return this.sender;
