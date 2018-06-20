@@ -1,13 +1,15 @@
 const _ = require("lodash");
 
 class Mailer {
-    constructor({ key, secret }, defaults) {
+    constructor(enabled, { key, secret }, defaults) {
+        this.enabled = enabled;
         this.key = key;
         this.secret = secret;
         this.defaults = defaults;
         _.defaults(this.defaults, {
             from: "default"
         });
+        console.log(this.enabled ? "true" : "false");
     }
 
     getSender() {
@@ -41,11 +43,7 @@ class Mailer {
     async send(config) {
         _.defaults(config, this.defaults);
 
-        console.log("Sending with config: ", config);
-
         let { subject, text, html, template_id, template_vars, from, from_addresses, to, bcc, cc, error_reporting, headers } = config;
-
-        console.log(from_addresses);
 
         if (!from_addresses || !from || !from_addresses[from]) {
             throw new Error(`Email error, missing from or from not found in from list`);
@@ -91,12 +89,14 @@ class Mailer {
             }
         }
 
-        console.log("Sending : ");
-        console.log(email);
-
         try {
-            const res = await this.getSender().request({ Messages: [email] });
-            console.log("Result > ", res);
+            console.log("Enabled is ", this.enabled);
+            if (this.enabled) {
+                console.log("Enabled so send ????");
+                //const res = await this.getSender().request({ Messages: [email] });
+            } else {
+                console.log("Mailjet mailer is not enabled");
+            }
         } catch (e) {
             console.error("Error sending email : ");
             console.log(e);

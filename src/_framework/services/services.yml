@@ -2,6 +2,7 @@ services:
     mailjet.mailer:
         module:             !plugin_dir /services/Mailer
         args:
+            -   !parameter  mailjet.enabled
             -
                 key:        !parameter mailjet.key
                 secret:     !parameter mailjet.secret
