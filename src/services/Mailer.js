@@ -9,7 +9,6 @@ class Mailer {
         _.defaults(this.defaults, {
             from: "default"
         });
-        console.log(this.enabled ? "true" : "false");
     }
 
     getSender() {
@@ -90,10 +89,8 @@ class Mailer {
         }
 
         try {
-            console.log("Enabled is ", this.enabled);
             if (this.enabled) {
-                console.log("Enabled so send ????");
-                //const res = await this.getSender().request({ Messages: [email] });
+                const res = await this.getSender().request({ Messages: [email] });
             } else {
                 console.log("Mailjet mailer is not enabled");
             }
