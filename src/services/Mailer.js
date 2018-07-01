@@ -11,8 +11,8 @@ class Mailer {
         });
     }
 
-    getSender() {
-        if (!this.sender) {
+    getMailjet() {
+        if (!this.mailjet) {
             const mailjet = require("node-mailjet");
             this.mailjet = mailjet.connect(
                 this.key,
@@ -21,7 +21,14 @@ class Mailer {
                     version: "v3.1"
                 }
             );
-            this.sender = this.mailjet.post("send");
+        }
+
+        return this.mailjet;
+    }
+
+    getSender() {
+        if (!this.sender) {
+            this.sender = this.getMailjet().post("send");
         }
 
         return this.sender;

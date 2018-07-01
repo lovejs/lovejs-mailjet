@@ -4,7 +4,7 @@ class MailjetPlugin extends Plugin {
     async registerServices(container, origin) {
         container.setParameter(`mailjet.key`, this.get("mailjet.key"));
         container.setParameter(`mailjet.secret`, this.get("mailjet.secret"));
-        container.setParameter(`mailjet.enabled`, this.get("enabled", false) === "true");
+        container.setParameter(`mailjet.enabled`, this.get("enabled", false));
 
         let mailjetDefaults = {};
         ["from", "from_addresses", "to", "cc", "bcc", "errors_reporting"].forEach(k => {
