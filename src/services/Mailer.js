@@ -49,7 +49,21 @@ class Mailer {
     async send(config) {
         _.defaults(config, this.defaults);
 
-        let { subject, text, html, template_id, template_vars, from, from_addresses, to, bcc, cc, error_reporting, headers } = config;
+        let {
+            subject,
+            text,
+            html,
+            template_id,
+            template_vars,
+            from,
+            from_addresses,
+            to,
+            bcc,
+            cc,
+            error_reporting,
+            headers,
+            attachments
+        } = config;
 
         if (!from_addresses || !from || !from_addresses[from]) {
             throw new Error(`Email error, missing from or from not found in from list`);
@@ -93,6 +107,10 @@ class Mailer {
             if (error_reporting) {
                 email["TemplateErrorReporting"] = error_reporting;
             }
+        }
+
+        if (attachments && attachments.length > 0) {
+            email.Attachments = attachments;
         }
 
         try {
